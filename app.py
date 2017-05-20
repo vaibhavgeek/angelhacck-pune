@@ -45,9 +45,8 @@ def webhook():
 
        # db.user.update({"fbId": user["fbId"]} , {"$set" : {}})
         
-        send_text_message(sender, "welcome")
-        
-
+         
+        print message
         if message == "complaint":
             send_text_message(sender , "Hi, " + user["first_name"] + " We are here to help you. Please give us following info for the person facing the injustice")
             send_replies(
@@ -82,7 +81,7 @@ def webhook():
                      quick_reply("Other",payload="genOther")
 
                  ]) 
-        
+
         # elif message == "topics_to_learn" or message == "back":
         #     send_text_message(sender , "1.) Operation on Numbers\n2.) Rational Numbers\n3.)Linear Equation in One Variable\n4.)Linear Equations in Two Variables\n5.) Quadratic Equations")
         #     send_replies(
