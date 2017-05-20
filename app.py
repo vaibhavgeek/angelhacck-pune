@@ -44,29 +44,6 @@ def webhook():
         if message == "help":
             send_text_message(sender , "You can choose topic you would like to learn and practice from the menu on left. For more information you can drop us a message and we will reply back to you shortly. ")
 
-        elif message == "courses": 
-         send_carasol_items(
-                sender,
-                [
-                    generate_carasol_items(
-                        "Students in Class 3-12",
-                        "http://vedicmathsindia.org/wp-content/uploads/2016/11/kids-1-150x150.jpg", "SIC"),
-                    generate_carasol_items(
-                        "Teachers Training Program",
-                        "http://vedicmathsindia.org/wp-content/uploads/2016/11/teachers-150x150.jpg",
-                        "MCT"),
-                    generate_carasol_items(
-                        "Tailored course for competitive exams",
-                        "http://vedicmathsindia.org/wp-content/uploads/2016/11/students-150x150.jpg",
-                        "TCCE"),
-                    generate_carasol_items(
-                        "Course for Parents",
-                        "http://vedicmathsindia.org/wp-content/uploads/2016/11/parents-150x150.jpg",
-                        "CFP")])     
-        elif message == "account": 
-            send_text_message(sender , "You have currently subscribed to our free courses only. You can buy the courses as you like")
-        elif message == "contact": 
-            send_text_message(sender , "You can contact us by email gtekriwal@vedicmathsindia.org or call us at +91-98305-32264 ")    
         # elif message == "topics_to_learn" or message == "back":
         #     send_text_message(sender , "1.) Operation on Numbers\n2.) Rational Numbers\n3.)Linear Equation in One Variable\n4.)Linear Equations in Two Variables\n5.) Quadratic Equations")
         #     send_replies(
