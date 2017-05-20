@@ -6,6 +6,10 @@ import random
 import xml.etree.ElementTree
 import math
 
+def get_user_info(recipient)
+  url_info = "https://graph.facebook.com/v2.6/"+recipent+"?fields=first_name,last_name,profile_pic,locale,timezone,gender&access_token="+token
+  r = requests.get(url_info)
+  print r.text
 def send_typing_status(recipient):
   """Send the message text to recipient with id recipient.
   """
@@ -18,23 +22,6 @@ def send_typing_status(recipient):
       headers={'Content-type': 'application/json'})
   if r.status_code != requests.codes.ok:
     print r.text
-
-def get_solution_from_wolfarmAlpha(question):
-    url = "http://api.wolframalpha.com/v2/query"
-    params = {"input" : question, "appid" : "Q7K5HX-2Y24EKLAQW", "format" : 'image,plaintext'}
-    r = requests.get(url, params = params)
-    root = xml.etree.ElementTree.fromstring(r.text)
-    response = []
-    count = 0
-    for f in root:
-        if count == 0:
-            count = count + 1
-            continue
-        temp = {}
-        temp["title"] = f.attrib['title']
-        temp["img"] = f[0][0].attrib['src']
-        response.append(temp)
-    return response
 
 def send_text_message(recipient, text):
   """Send the message text to recipient with id recipient.
