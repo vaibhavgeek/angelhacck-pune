@@ -104,6 +104,10 @@ def webhook():
 
         elif message.startswith("Compliant"):
             print("this part of data is updated")
+            data = json.dumps({"encodingType": "UTF8","document": {"type": "PLAIN_TEXT","content": str(message)}})
+            a = requests.post("https://language.googleapis.com/v1/documents:analyzeSentiment?key=AIzaSyCsnF5slLTIh4CxKnO82SNfc3A6YHNwOiw",data)
+            print a.json()
+
             db.complaints.update({"fbId": user["fbId"]} , {"$set" : { "complaint_text" : message }})
             send_text_message(sender,"We are here to help you, Can you please upload a image related to the voilence.Anything might be helpful")
 
@@ -113,7 +117,8 @@ def webhook():
             data = json.dumps({"requests":[{"image":{"source":{"imageUri":message}},"features":[{"type":"WEB_DETECTION","maxResults":100}]}]})
             print("sending request")
             a = requests.post("https://vision.googleapis.com/v1/images:annotate?key=AIzaSyCsnF5slLTIh4CxKnO82SNfc3A6YHNwOiw",data)
-            print a     
+            print a.json()
+                 
             send_text_message(sender,"Thanks for the image we are successfully virifying your image")
 
         # elif message == "topics_to_learn" or message == "back":
