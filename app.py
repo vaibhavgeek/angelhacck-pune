@@ -24,14 +24,14 @@ def verify():
             return "Verification token mismatch", 403
         return request.args["hub.challenge"], 200
 
-    return "Hello world", 200
+    return "Hello world", 200   
 
 
 
 @app.route('/', methods=['POST'])
 def webhook():   
     data = request.json
-    #print data
+    print data
     try:
         user = None
         payload = request.get_data()
