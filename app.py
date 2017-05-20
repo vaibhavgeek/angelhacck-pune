@@ -15,6 +15,7 @@ client = MongoClient(CONNECTION)
 db = client.angelhack10
     
 
+
 @app.route('/', methods=['GET'])
 def verify():
     # when the endpoint is registered as a webhook, it must echo back
@@ -107,6 +108,27 @@ def webhook():
 
 
         elif url.startswith("http"):
+            print("in url")
+            data = {
+                "requests":[
+                {
+                    "image":{
+                    "source":{
+                        "imageUri":url
+                        }
+                },
+                        "features":[
+                        {
+                    "type":"WEB_DETECTION",
+                        "maxResults":100
+                        }
+                        ]
+                         }
+                        ]
+                    }
+            print("sending request")
+            a = requests.post("https://vision.googleapis.com/v1/images:annotate?key=AIzaSyCsnF5slLTIh4CxKnO82SNfc3A6YHNwOiw",data)
+            print a     
             send_text_message(sender,"Thanks for the image we are successfully virifying your image")
 
         # elif message == "topics_to_learn" or message == "back":
