@@ -7,7 +7,7 @@ import xml.etree.ElementTree
 import math
 
 def get_user_info(recipient):
-  url_info = "https://graph.facebook.com/v2.6/"+recipient+"?fields=first_name,last_name,profile_pic,locale,timezone,gender&access_token="+token
+  url_info = "https://graph.facebook.com/v2.6/"+str(recipient)+"?fields=first_name,last_name,profile_pic,locale,timezone,gender&access_token="+str(token)
   r = requests.get(url_info)
   return r.json()
 def send_typing_status(recipient):
@@ -173,7 +173,6 @@ def get_message(data):
 #                if messaging_event.get("postback"):  # user clicked/tapped "postback" button in earlier message
 #                    pass
 
-
 def messaging_events(payload):
     """Generate tuples of (sender_id, message_text) from the
     provided payload.
@@ -183,5 +182,5 @@ def messaging_events(payload):
     for event in messaging_events:
         if "postback" in event and "payload" in event["postback"]:
             return (event["sender"]["id"], event["postback"]["payload"])
-        elif "message" in event and "text" in event["message"]:
-            return (event["sender"]["id"], event["message"]["text"])
+        elif "message" in event and "quick_reply" in event["message"]:
+            return (event["sender"]["id"], event["message"]["quick_reply"]["payload"])
