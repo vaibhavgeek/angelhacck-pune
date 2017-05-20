@@ -31,14 +31,14 @@ def verify():
 @app.route('/', methods=['POST'])
 def webhook():   
     data = request.json
-    print data
+    #print data
     try:
         user = None
         payload = request.get_data()
         sender, message = messaging_events(payload)
         user = db.user.find_one({"fbId": sender})
         try:
-            complaint_text = complaint(payload)
+            complaint_text = get_message(data)
             print complaint_text
         except:
             pass
@@ -91,7 +91,7 @@ def webhook():
             send_text_message(sender , "Thanks for your telling your Gender. We have noted it down.")
             send_text_message(sender,"Can you please tell us about the complaint?")
 
-        #elif complaint_text.startswith("Complaint:"):
+        #elif message.startswith("Complaint:"):
            # db.complaints.update({"fbId": user["fbId"]} , {"$set" : { "complaint_text" : message[3:] }})
            # sender_text_message(sender, "We are here to help you, Can you please upload a image related to the voilence.Anything might be helpful ")
 
