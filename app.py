@@ -35,13 +35,13 @@ def webhook():
     try:
         user = None
         payload = request.get_data()
-        sender, message = messaging_events(payload)
-        user = db.user.find_one({"fbId": sender})
         try:
-            complaint_text = get_message(data)
-            print complaint_text
+            sender, message = messaging_events(payload)
         except:
-            pass
+            message, sender = get_message(data)
+        print message
+        print sender    
+        user = db.user.find_one({"fbId": sender})
         fbinfo = get_user_info(sender)
         if user is None:
             db.user.insert({"fbId": sender ,  "first_name" : fbinfo["first_name"] , "last_name" : fbinfo["last_name"] , "profile_pic" : fbinfo["profile_pic"]})
