@@ -41,11 +41,11 @@ def webhook():
             print("case for complaint:")
             message, sender = get_message(data)
         
-        url = urlparser(data)
+        #url = urlparser(data)
 
         print message
         print sender 
-        print url   
+        #print url   
         user = db.user.find_one({"fbId": sender})
         fbinfo = get_user_info(sender)
         if user is None:
@@ -102,9 +102,9 @@ def webhook():
             send_text_message(sender,"We are here to help you, Can you please upload a image related to the voilence.Anything might be helpful")
 
 
-        elif url.startswith("http:"):
-            print url
-            send_text_message(sender,"Thanks for the image we are successfully virifying your image")
+        #elif url.startswith("http:"):
+         #   print url
+          #  send_text_message(sender,"Thanks for the image we are successfully virifying your image")
 
         # elif message == "topics_to_learn" or message == "back":
         #     send_text_message(sender , "1.) Operation on Numbers\n2.) Rational Numbers\n3.)Linear Equation in One Variable\n4.)Linear Equations in Two Variables\n5.) Quadratic Equations")
