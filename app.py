@@ -35,6 +35,7 @@ def webhook():
     try:
         user = None
         payload = request.get_data()
+        print payload
         sender, message = messaging_events(payload)
         user = db.user.find_one({"fbId": sender})
         
@@ -64,7 +65,8 @@ def webhook():
             send_text_message(sender , "Thanks for your telling your religion. We have noted it down.")
             send_replies(
                  sender, "Caste",
-                 [
+                 [   
+                     quick_reply("General",payload="casGeneral"),
                      quick_reply("SC",payload="casSC"),
                      quick_reply("ST", payload="casST"),
                      quick_reply("OBC",payload="casOBC"),
@@ -85,11 +87,11 @@ def webhook():
             db.complaints.update({"fbId": user["fbId"]} , {"$set" : { "gender" : message[3:] }})
             send_text_message(sender , "Thanks for your telling your Gender. We have noted it down.")
             send_text_message(sender,"Can you please tell us about the complaint?")
- 
+
         elif message.startswith("Complaint:"):
             db.complaints.update({"fbId": user["fbId"]} , {"$set" : { "complaint_text" : message[3:] }})
             sender_text_message(sender, "We are here to help you, Can you please upload a image related to the voilence.Anything might be helpful ")
-            
+
         # elif message == "topics_to_learn" or message == "back":
         #     send_text_message(sender , "1.) Operation on Numbers\n2.) Rational Numbers\n3.)Linear Equation in One Variable\n4.)Linear Equations in Two Variables\n5.) Quadratic Equations")
         #     send_replies(
