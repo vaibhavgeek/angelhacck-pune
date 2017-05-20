@@ -94,6 +94,7 @@ def webhook():
             send_text_message(sender,"Can you please tell us about the complaint?")
 
         elif message.startswith("Comp"):
+            print("this part of data is updated")
             db.complaints.update({"fbId": user["fbId"]} , {"$set" : { "complaint_text" : message }})
             sender_text_message(sender, "We are here to help you, Can you please upload a image related to the voilence.Anything might be helpful ")
 
