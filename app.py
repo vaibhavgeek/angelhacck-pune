@@ -38,6 +38,7 @@ def webhook():
         try:
             sender, message = messaging_events(payload)
         except:
+            print("case for complaints")
             message, sender = get_message(data)
        
         print message
