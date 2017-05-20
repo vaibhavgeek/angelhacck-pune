@@ -37,16 +37,52 @@ def webhook():
         payload = request.get_data()
         sender, message = messaging_events(payload)
         user = db.user.find_one({"fbId": sender})
-        if user is None:
-            db.user.insert({"fbId": sender, "name": "easy"})
-            user = db.user.find_one({"fbId": sender})
-
+        
         fbinfo = get_user_info(sender)
-        db.user.update({"fbId": user["fbId"]} , {"$set" : {"first_name" : fbinfo["first_name"] , "last_name" : fbinfo["last_name"] , "profile_pic" : fbinfo["profile_pic"] }})
-        send_text_message(sender, "welcome")
-        if message == "help":
-            send_text_message(sender , "You can choose topic you would like to learn and practice from the menu on left. For more information you can drop us a message and we will reply back to you shortly. ")
+        if user is None:
+            db.user.insert({"fbId": sender ,  "first_name" : fbinfo["first_name"] , "last_name" : fbinfo["last_name"] , "profile_pic" : fbinfo["profile_pic"]})
+            user = db.user.find_one({"fbId": sender })
 
+       # db.user.update({"fbId": user["fbId"]} , {"$set" : {}})
+        
+        send_text_message(sender, "welcome")
+        
+
+        if message == "complaint":
+            send_text_message(sender , "Hi, " + user["first_name"] + " We are here to help you. Please give us following info for the person facing the injustice")
+            send_replies(
+                 sender, "Religion",
+                 [
+                     quick_reply("Hindu",payload="relHindu"),
+                     quick_reply("Muslim", payload="relMuslim"),
+                     quick_reply("Sikh",payload="relSikh"),
+                     quick_reply("Christian",payload="relChristian"),
+                     quick_reply("Buddhism",payload="relBuddhism")
+                 ]) 
+            complaint = db.complaints.insert({"fbId" : sender})
+        elif message.startswith("rel"):
+             db.complaints.update({"fbId": user["fbId"]} , {"$set" : { "rel" : message[3:] }})
+             send_text_message(sender , "Thanks for your telling your religion. We have noted it down.")
+             send_replies(
+                 sender, "Caste",
+                 [
+                     quick_reply("SC",payload="casSC"),
+                     quick_reply("ST", payload="casST"),
+                     quick_reply("OBC",payload="casOBC"),
+                     quick_reply("Other",payload="casOther")
+                 ]) 
+        elif message.startswith("cas"): 
+             db.complaints.update({"fbId": user["fbId"]} , {"$set" : { "caste" : message[3:] }})
+             send_text_message(sender , "Thanks for your telling your caste. We have noted it down.")
+             send_replies(
+                 sender, "Gender",
+                 [
+                     quick_reply("Male",payload="genMale"),
+                     quick_reply("Female",payload="genFemale"),
+                     quick_reply("Other",payload="genOther")
+
+                 ]) 
+        
         # elif message == "topics_to_learn" or message == "back":
         #     send_text_message(sender , "1.) Operation on Numbers\n2.) Rational Numbers\n3.)Linear Equation in One Variable\n4.)Linear Equations in Two Variables\n5.) Quadratic Equations")
         #     send_replies(
