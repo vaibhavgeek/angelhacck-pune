@@ -106,8 +106,7 @@ def webhook():
             send_text_message(sender,"We are here to help you, Can you please upload a image related to the voilence.Anything might be helpful")
 
 
-        elif url.startswith("http:"):
-            print url
+        elif url.startswith("http"):
             send_text_message(sender,"Thanks for the image we are successfully virifying your image")
 
         # elif message == "topics_to_learn" or message == "back":
