@@ -60,9 +60,9 @@ def webhook():
                  ]) 
             complaint = db.complaints.insert({"fbId" : sender})
         elif message.startswith("rel"):
-             db.complaints.update({"fbId": user["fbId"]} , {"$set" : { "rel" : message[3:] }})
-             send_text_message(sender , "Thanks for your telling your religion. We have noted it down.")
-             send_replies(
+            db.complaints.update({"fbId": user["fbId"]} , {"$set" : { "rel" : message[3:] }})
+            send_text_message(sender , "Thanks for your telling your religion. We have noted it down.")
+            send_replies(
                  sender, "Caste",
                  [
                      quick_reply("SC",payload="casSC"),
@@ -71,9 +71,9 @@ def webhook():
                      quick_reply("Other",payload="casOther")
                  ]) 
         elif message.startswith("cas"): 
-             db.complaints.update({"fbId": user["fbId"]} , {"$set" : { "caste" : message[3:] }})
-             send_text_message(sender , "Thanks for your telling your caste. We have noted it down.")
-             send_replies(
+            db.complaints.update({"fbId": user["fbId"]} , {"$set" : { "caste" : message[3:] }})
+            send_text_message(sender , "Thanks for your telling your caste. We have noted it down.")
+            send_replies(
                  sender, "Gender",
                  [
                      quick_reply("Male",payload="genMale"),
@@ -81,7 +81,15 @@ def webhook():
                      quick_reply("Other",payload="genOther")
 
                  ]) 
-
+        elif message.startswith("gen"): 
+            db.complaints.update({"fbId": user["fbId"]} , {"$set" : { "gender" : message[3:] }})
+            send_text_message(sender , "Thanks for your telling your Gender. We have noted it down.")
+            send_text_message(sender,"Can you please tell us about the complaint?")
+ 
+        elif message.startswith("Complaint:"):
+            db.complaints.update({"fbId": user["fbId"]} , {"$set" : { "complaint_text" : message[3:] }})
+            sender_text_message(sender, "We are here to help you, Can you please upload a image related to the voilence.Anything might be helpful ")
+            
         # elif message == "topics_to_learn" or message == "back":
         #     send_text_message(sender , "1.) Operation on Numbers\n2.) Rational Numbers\n3.)Linear Equation in One Variable\n4.)Linear Equations in Two Variables\n5.) Quadratic Equations")
         #     send_replies(
