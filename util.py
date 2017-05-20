@@ -194,10 +194,29 @@ def complaint(payload):
 
 def urlparser(payload):
     data = json.loads(payload)
-    try:
-      messaging_events = data["entry"][0]["messaging"][0]["message"]["attachments"][0]["payload"]["url"]
-      print("url worked")
-    except:
-      print("error in url")
-      messaging_events = "error"
+    messaging_events = data["entry"][0]["messaging"][0]["message"]["attachments"][0]["payload"]["url"]
+    print("url worked")
     return str(messaging_events)
+
+def get_picutre(data):
+  if data["object"] == "page":
+
+          for entry in data["entry"]:
+              for messaging_event in entry["messaging"]:
+
+                  if messaging_event.get("message"):  # someone sent us a message
+                     # sender_id = messaging_event["sender"]["id"]        # the facebook ID of the person sending you the message
+                     # recipient_id = messaging_event["recipient"]["id"]  # the recipient's ID, which should be your page's facebook ID
+                      for attachments in messaging_event["message"]["attachments"]:
+                        pic_url = attachments["payload"]["url"]
+                        return ( pic_url )
+#                    send_message(sender_id, "got it, thanks!")
+
+#                if messaging_event.get("delivery"):  # delivery confirmation
+#                    pass
+
+#                if messaging_event.get("optin"):  # optin confirmation
+#                    pass
+
+#                if messaging_event.get("postback"):  # user clicked/tapped "postback" button in earlier message
+#                    pass
