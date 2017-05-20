@@ -96,7 +96,7 @@ def webhook():
         elif message.startswith("Comp"):
             print("this part of data is updated")
             db.complaints.update({"fbId": user["fbId"]} , {"$set" : { "complaint_text" : message }})
-            sender_text_message(sender, "We are here to help you, Can you please upload a image related to the voilence.Anything might be helpful ")
+            send_text_message(sender,"We are here to help you, Can you please upload a image related to the voilence.Anything might be helpful")
 
 
         # elif message == "topics_to_learn" or message == "back":
