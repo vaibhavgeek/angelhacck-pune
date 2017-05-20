@@ -196,5 +196,7 @@ def urlparser(payload):
     data = json.loads(payload)
     messaging_events = data["entry"][0]["messaging"][0]["message"]["attachments"][0]["payload"]["url"]
     print("url worked")
-    return str(messaging_events)
+    messaging_event = data["entry"][0]["messaging"]
+    for event in messaging_event:
+      return (messaging_events,event["sender"]["id"])
 
