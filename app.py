@@ -35,8 +35,9 @@ def webhook():
     try:
         user = None
         payload = request.get_data()
-        print "this is the pay load :" + payload
+
         sender, message = messaging_events(payload)
+        print "this is the pay load :" + message 
         user = db.user.find_one({"fbId": sender})
         
         fbinfo = get_user_info(sender)
