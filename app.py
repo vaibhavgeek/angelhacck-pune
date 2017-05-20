@@ -113,9 +113,9 @@ def webhook():
         elif message.startswith("https"):
             dat = json.dumps({"requests":[{"image":{"source":{"imageUri":message}},"features":[{"type":"WEB_DETECTION","maxResults":100}]}]})
             a = requests.post("https://vision.googleapis.com/v1/images:annotate?key=AIzaSyCsnF5slLTIh4CxKnO82SNfc3A6YHNwOiw",dat)
+            db.complaints.update({"fbId": user["fbId"]} , {"$set" : { "complaint_pic" : message }})
             print a.json()
-                 
-            send_text_message(sender,"Thanks for the image we are successfully virifying your image")
+            send_text_message(sender,"Thanks for the image. We are making sure of the aunthenticity of image.")
 
         # elif message == "topics_to_learn" or message == "back":
         #     send_text_message(sender , "1.) Operation on Numbers\n2.) Rational Numbers\n3.)Linear Equation in One Variable\n4.)Linear Equations in Two Variables\n5.) Quadratic Equations")
