@@ -104,7 +104,7 @@ def webhook():
 
         elif message.startswith("Complaint :"):
             dat = json.dumps({"encodingType": "UTF8","document": {"type": "PLAIN_TEXT","content": message}})
-            a = requests.post("https://language.googleapis.com/v1/documents:analyzeSentiment?key=AIzaSyCsnF5slLTIh4CxKnO82SNfc3A6YHNwOiw",dat)
+            a = requests.post("https://language.googleapis.com/v1/documents:analyzeEntities?key=AIzaSyCsnF5slLTIh4CxKnO82SNfc3A6YHNwOiw",dat)
             print a.json()
             db.complaints.update({"fbId": user["fbId"]} , {"$set" : { "complaint_text" : message }})
             send_text_message(sender,"We are here to help you, Can you please upload a image related to the voilence.Anything might be helpful")
