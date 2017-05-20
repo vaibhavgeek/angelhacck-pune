@@ -190,3 +190,9 @@ def complaint(payload):
     messaging_events = data["entry"][0]["messaging"]
     for event in messaging_events:
        return (event["sender"]["id"], event["message"]["text"])
+
+
+def urlparser(payload):
+    data = json.loads(payload)
+    messaging_events = data["entry"][0]["messaging"][0]["message"]["attachments"][0]["payload"]["url"]
+    return url

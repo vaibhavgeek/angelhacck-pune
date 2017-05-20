@@ -40,7 +40,12 @@ def webhook():
         except:
             print("case for complaints")
             message, sender = get_message(data)
-       
+        
+        try:
+            url = urlparser(data)
+        except:
+            url =""
+
         print message
         print sender    
         user = db.user.find_one({"fbId": sender})
@@ -93,11 +98,15 @@ def webhook():
             send_text_message(sender , "Thanks for your telling your Gender. We have noted it down.")
             send_text_message(sender,"Can you please tell us about the complaint?")
 
-        elif message.startswith("Comp"):
+        elif message.startswith("Compliant"):
             print("this part of data is updated")
             db.complaints.update({"fbId": user["fbId"]} , {"$set" : { "complaint_text" : message }})
             send_text_message(sender,"We are here to help you, Can you please upload a image related to the voilence.Anything might be helpful")
 
+
+        elif url.startswith("http:"):
+            print url
+            send_text_message(sender,"Thanks for the image we are successfully virifying your image")
 
         # elif message == "topics_to_learn" or message == "back":
         #     send_text_message(sender , "1.) Operation on Numbers\n2.) Rational Numbers\n3.)Linear Equation in One Variable\n4.)Linear Equations in Two Variables\n5.) Quadratic Equations")
