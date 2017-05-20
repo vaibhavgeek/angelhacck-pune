@@ -47,7 +47,8 @@ def webhook():
             url =""
 
         print message
-        print sender    
+        print sender 
+        print url   
         user = db.user.find_one({"fbId": sender})
         fbinfo = get_user_info(sender)
         if user is None:
