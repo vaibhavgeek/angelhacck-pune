@@ -41,11 +41,7 @@ def webhook():
             print("case for complaints")
             message, sender = get_message(data)
         
-        try:
-            url = urlparser(data)
-            print "worked"
-        except:
-            url ="hey"
+        url = urlparser(data)
 
         print message
         print sender 
