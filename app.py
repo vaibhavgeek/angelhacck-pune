@@ -48,7 +48,7 @@ def webhook():
             except:
                 print("case for url:")
                 url = urlparser(payload)
-                print url
+                print("sucesss obtained")
 
         user = db.user.find_one({"fbId": sender})
         fbinfo = get_user_info(sender)

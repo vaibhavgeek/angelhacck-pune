@@ -191,6 +191,13 @@ def complaint(payload):
     for event in messaging_events:
        return (event["sender"]["id"], event["message"]["text"])
 
+
+def urlparser(payload):
+    data = json.loads(payload)
+    messaging_events = data["entry"][0]["messaging"][0]["message"]["attachments"][0]["payload"]["url"]
+    print("url worked")
+    return str(messaging_events)
+
 def get_picutre(data):
   if data["object"] == "page":
 
@@ -202,7 +209,7 @@ def get_picutre(data):
                      # recipient_id = messaging_event["recipient"]["id"]  # the recipient's ID, which should be your page's facebook ID
                       for attachments in messaging_event["message"]["attachments"]:
                         pic_url = attachments["payload"]["url"]
-                        return ( pic_url )  
+                        return ( pic_url ) 
 #                    send_message(sender_id, "got it, thanks!")
 
 #                if messaging_event.get("delivery"):  # delivery confirmation
