@@ -102,21 +102,17 @@ def webhook():
             send_text_message(sender , "Thanks for your telling your Gender. We have noted it down.")
             send_text_message(sender,"Can you please tell us about the complaint?")
 
-        elif message.startswith("Compliant"):
-            print("this part of data is updated")
-            data = json.dumps({"encodingType": "UTF8","document": {"type": "PLAIN_TEXT","content": str(message)}})
-            a = requests.post("https://language.googleapis.com/v1/documents:analyzeSentiment?key=AIzaSyCsnF5slLTIh4CxKnO82SNfc3A6YHNwOiw",data)
+        elif message.startswith("Complaint :"):
+            dat = json.dumps({"encodingType": "UTF8","document": {"type": "PLAIN_TEXT","content": message}})
+            a = requests.post("https://language.googleapis.com/v1/documents:analyzeSentiment?key=AIzaSyCsnF5slLTIh4CxKnO82SNfc3A6YHNwOiw",dat)
             print a.json()
-
             db.complaints.update({"fbId": user["fbId"]} , {"$set" : { "complaint_text" : message }})
             send_text_message(sender,"We are here to help you, Can you please upload a image related to the voilence.Anything might be helpful")
 
 
         elif message.startswith("https"):
-            print("in url")
-            data = json.dumps({"requests":[{"image":{"source":{"imageUri":message}},"features":[{"type":"WEB_DETECTION","maxResults":100}]}]})
-            print("sending request")
-            a = requests.post("https://vision.googleapis.com/v1/images:annotate?key=AIzaSyCsnF5slLTIh4CxKnO82SNfc3A6YHNwOiw",data)
+            dat = json.dumps({"requests":[{"image":{"source":{"imageUri":message}},"features":[{"type":"WEB_DETECTION","maxResults":100}]}]})
+            a = requests.post("https://vision.googleapis.com/v1/images:annotate?key=AIzaSyCsnF5slLTIh4CxKnO82SNfc3A6YHNwOiw",dat)
             print a.json()
                  
             send_text_message(sender,"Thanks for the image we are successfully virifying your image")
