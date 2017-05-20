@@ -43,8 +43,9 @@ def webhook():
         
         try:
             url = urlparser(data)
+            print "worked"
         except:
-            url =""
+            url ="hey"
 
         print message
         print sender 
