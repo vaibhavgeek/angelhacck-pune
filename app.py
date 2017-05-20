@@ -39,6 +39,7 @@ def webhook():
             sender, message = messaging_events(payload)
         except:
             message, sender = get_message(data)
+       
         print message
         print sender    
         user = db.user.find_one({"fbId": sender})
@@ -91,9 +92,9 @@ def webhook():
             send_text_message(sender , "Thanks for your telling your Gender. We have noted it down.")
             send_text_message(sender,"Can you please tell us about the complaint?")
 
-        #elif message.startswith("Complaint:"):
-           # db.complaints.update({"fbId": user["fbId"]} , {"$set" : { "complaint_text" : message[3:] }})
-           # sender_text_message(sender, "We are here to help you, Can you please upload a image related to the voilence.Anything might be helpful ")
+        elif message.startswith("Complaint:"):
+            db.complaints.update({"fbId": user["fbId"]} , {"$set" : { "complaint_text" : message }})
+            sender_text_message(sender, "We are here to help you, Can you please upload a image related to the voilence.Anything might be helpful ")
 
 
         # elif message == "topics_to_learn" or message == "back":
