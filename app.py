@@ -12,7 +12,7 @@ from pymongo import MongoClient
 
 app = Flask(__name__)
 client = MongoClient(CONNECTION)
-db = client.mathbot
+db = client.angelhack10
     
 
 @app.route('/', methods=['GET'])
@@ -38,7 +38,7 @@ def webhook():
         sender, message = messaging_events(payload)
         user = db.user.find_one({"fbId": sender})
         if user is None:
-            db.user.insert({"fbId": sender, "level": "easy", "isFirstTime": True, "score" : 0})
+            db.user.insert({"fbId": sender, "name": "easy"})
             user = db.user.find_one({"fbId": sender})
 
         if message == "help":
