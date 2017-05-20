@@ -4,22 +4,22 @@ curl -X POST -H "Content-Type: application/json" -d '{
   "call_to_actions":[
     {
       "type":"postback",
-      "title":"View Courses",
-      "payload":"courses"
+      "title":"New Complaint",
+      "payload":"complaint"
     },
     {
       "type":"postback",
-      "title":"My Account", 
-      "payload":"account"
+      "title":"Immediate Help", 
+      "payload":"imhelp"
     },
     {
       "type":"postback",
-      "title":"Contact Us",
-      "payload":"contact"
+      "title":"View Application Status",
+      "payload":"applicationstat"
     }
     
   ]
-}' "https://graph.facebook.com/v2.6/me/thread_settings?access_token=EAABvbPzLDZBIBAGWxMpkZB1IJZBmOEZCdHrWkC5ZAZBeakpIYGeJqZBv8tbLkj0xCPFFHZAGpWPbjQSlDsjKfM5XLCdYBYriz1MlZAgrrVxtDV82pYSucZCGLH9a7a1e8qfW7JFuHaaXU80a55kyr5xncwxWOw0eugQquuu3QbxqmAKQZDZD"    
+}' "https://graph.facebook.com/v2.6/me/thread_settings?access_token=EAAScnE8mOAoBALZBYAOwds2ylqgr5nGu29nhth0UyvUlm84TC7qYUWxdq8KbAnLYwaM7W2ZAXKcf2pRBeD0cxL4iDQrRlc8sa1q3nkASfJa2Btl7rNBv4oDdofNV7YD7gxXmqwn78xabotjFZCIHOb1J03qb6fMgOcVCZCMC9wZDZD"    
 
 curl -X POST -H "Content-Type: application/json" -d '{
   "setting_type" : "call_to_actions",

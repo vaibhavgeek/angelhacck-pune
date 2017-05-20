@@ -1,7 +1,7 @@
 import urllib 
 
-VERIFY_TOKEN = 'edunova.io'
-PAT = 'EAABvbPzLDZBIBAGWxMpkZB1IJZBmOEZCdHrWkC5ZAZBeakpIYGeJqZBv8tbLkj0xCPFFHZAGpWPbjQSlDsjKfM5XLCdYBYriz1MlZAgrrVxtDV82pYSucZCGLH9a7a1e8qfW7JFuHaaXU80a55kyr5xncwxWOw0eugQquuu3QbxqmAKQZDZD'
+VERIFY_TOKEN = 'ah10'
+PAT = 'EAAScnE8mOAoBALZBYAOwds2ylqgr5nGu29nhth0UyvUlm84TC7qYUWxdq8KbAnLYwaM7W2ZAXKcf2pRBeD0cxL4iDQrRlc8sa1q3nkASfJa2Btl7rNBv4oDdofNV7YD7gxXmqwn78xabotjFZCIHOb1J03qb6fMgOcVCZCMC9wZDZD'
 SEND_MESSAGE_URL = 'https://graph.facebook.com/v2.6/me/messages'
 THREAD_URL = 'https://graph.facebook.com/v2.6/me/thread_settings'
-CONNECTION = 'mongodb://vaibhavgeek:' + urllib.quote("vaibhavgeek@123") + '@ds149577.mlab.com:49577/mathbot'
+CONNECTION = 'mongodb://vaibhavgeek:nonsense@ds147681.mlab.com:47681/angelhack10'
