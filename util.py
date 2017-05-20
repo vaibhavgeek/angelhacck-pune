@@ -9,8 +9,7 @@ import math
 def get_user_info(recipient):
   url_info = "https://graph.facebook.com/v2.6/"+recipent+"?fields=first_name,last_name,profile_pic,locale,timezone,gender&access_token="+token
   r = requests.get(url_info)
-  return r.text
-  print r.text
+  return r.json()
 def send_typing_status(recipient):
   """Send the message text to recipient with id recipient.
   """
