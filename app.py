@@ -48,8 +48,8 @@ def webhook():
                 print sender
             except:
                 print("case for url:")
-                url = urlparser(payload)
-                print url
+                message = urlparser(payload)
+                print message
 
         user = db.user.find_one({"fbId": sender})
         fbinfo = get_user_info(sender)
@@ -107,25 +107,9 @@ def webhook():
             send_text_message(sender,"We are here to help you, Can you please upload a image related to the voilence.Anything might be helpful")
 
 
-        elif url.startswith("http"):
+        elif message.startswith("https"):
             print("in url")
-            data = {
-                "requests":[
-                {
-                    "image":{
-                    "source":{
-                        "imageUri":url
-                        }
-                },
-                        "features":[
-                        {
-                    "type":"WEB_DETECTION",
-                        "maxResults":100
-                        }
-                        ]
-                         }
-                        ]
-                    }
+            data = {"requests":[{"image":{"source":{"imageUri":message}},"features":[{"type":"WEB_DETECTION","maxResults":100}]}]}
             print("sending request")
             a = requests.post("https://vision.googleapis.com/v1/images:annotate?key=AIzaSyCsnF5slLTIh4CxKnO82SNfc3A6YHNwOiw",data)
             print a     
