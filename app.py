@@ -42,7 +42,7 @@ def webhook():
             user = db.user.find_one({"fbId": sender})
 
         fbinfo = get_user_info(sender)
-        print fbinfo["first_name"]
+        db.user.update({"fbId": user["fbId"]} , {"$set" : {"first_name" : fbinfo["first_name"] , "last_name" : fbinfo["last_name"] , "profile_pic" : fbinfo["profile_pic"] }})
         send_text_message(sender, "welcome")
         if message == "help":
             send_text_message(sender , "You can choose topic you would like to learn and practice from the menu on left. For more information you can drop us a message and we will reply back to you shortly. ")
