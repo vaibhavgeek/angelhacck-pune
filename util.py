@@ -6,7 +6,7 @@ import random
 import xml.etree.ElementTree
 import math
 
-def get_user_info(recipient)
+def get_user_info(recipient):
   url_info = "https://graph.facebook.com/v2.6/"+recipent+"?fields=first_name,last_name,profile_pic,locale,timezone,gender&access_token="+token
   r = requests.get(url_info)
   return r.text
