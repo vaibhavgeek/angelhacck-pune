@@ -1,0 +1,15 @@
+  elif message == "more":
+            send_text_message(sender , "9.) Algebraic Expressions and Identities \n10.) Visualising Solid Shapes \n11.) Mensuration \n12.) Mensuration \n13.) Exponents and Powers \n14.) Direct and Inverse Proportions \n15.) Factorisation \n16.)Introduction to Graphs")
+            send_replies(
+                sender, "Enter the number corresponding to the chapter. Example '1' for Rational Numbers",
+                [
+                    quick_reply("back",payload="back"),
+                    quick_reply("9", payload="aei"),
+                    quick_reply("10",payload="vss"),
+                    quick_reply("11",payload="mensu"),
+                    quick_reply("12",payload="eap"),
+                    quick_reply("13",payload="daip"),
+                    quick_reply("14",payload="factor"),
+                    quick_reply("15",payload="itg"),
+                    quick_reply("16",payload="pwn")
+                ])

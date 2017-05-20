@@ -1,0 +1,55 @@
+curl -X POST -H "Content-Type: application/json" -d '{
+  "setting_type" : "call_to_actions",
+  "thread_state" : "existing_thread",
+  "call_to_actions":[
+    {
+      "type":"postback",
+      "title":"View Courses",
+      "payload":"courses"
+    },
+    {
+      "type":"postback",
+      "title":"My Account", 
+      "payload":"account"
+    },
+    {
+      "type":"postback",
+      "title":"Contact Us",
+      "payload":"contact"
+    }
+    
+  ]
+}' "https://graph.facebook.com/v2.6/me/thread_settings?access_token=EAABvbPzLDZBIBAGWxMpkZB1IJZBmOEZCdHrWkC5ZAZBeakpIYGeJqZBv8tbLkj0xCPFFHZAGpWPbjQSlDsjKfM5XLCdYBYriz1MlZAgrrVxtDV82pYSucZCGLH9a7a1e8qfW7JFuHaaXU80a55kyr5xncwxWOw0eugQquuu3QbxqmAKQZDZD"    
+
+curl -X POST -H "Content-Type: application/json" -d '{
+  "setting_type" : "call_to_actions",
+  "thread_state" : "existing_thread",
+  "call_to_actions":[
+    {
+      "type":"postback",
+      "title":"Topics to Learn",
+      "payload":"topics_to_learn"
+    },
+    {
+      "type":"postback",
+      "title":"My Learning Analysis",
+      "payload":"score"
+    },
+    {
+      "type":"postback",
+      "title":"Help",
+      "payload":"help"
+    }
+  ]
+}' "https://graph.facebook.com/v2.6/me/thread_settings?access_token=EAABvbPzLDZBIBAGWxMpkZB1IJZBmOEZCdHrWkC5ZAZBeakpIYGeJqZBv8tbLkj0xCPFFHZAGpWPbjQSlDsjKfM5XLCdYBYriz1MlZAgrrVxtDV82pYSucZCGLH9a7a1e8qfW7JFuHaaXU80a55kyr5xncwxWOw0eugQquuu3QbxqmAKQZDZD"    
+
+
+curl -X POST -H "Content-Type: application/json" -d '{
+"setting_type":"call_to_actions",
+"thread_state":"new_thread",
+"call_to_actions":[
+ {
+  "payload":"topics_to_learn"
+ }
+]
+}'  "https://graph.facebook.com/v2.6/me/thread_settings?access_token=EAABvbPzLDZBIBAGWxMpkZB1IJZBmOEZCdHrWkC5ZAZBeakpIYGeJqZBv8tbLkj0xCPFFHZAGpWPbjQSlDsjKfM5XLCdYBYriz1MlZAgrrVxtDV82pYSucZCGLH9a7a1e8qfW7JFuHaaXU80a55kyr5xncwxWOw0eugQquuu3QbxqmAKQZDZD"    
