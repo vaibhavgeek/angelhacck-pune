@@ -194,5 +194,9 @@ def complaint(payload):
 
 def urlparser(payload):
     data = json.loads(payload)
-    messaging_events = data["entry"][0]["messaging"][0]["message"]["attachments"][0]["payload"]["url"]
+    try:
+      messaging_events = data["entry"][0]["messaging"][0]["message"]["attachments"][0]["payload"]["url"]
+    except:
+      print("error in url")
+      messaging_events = "error"
     return messaging_events
