@@ -184,3 +184,8 @@ def messaging_events(payload):
             return (event["sender"]["id"], event["postback"]["payload"])
         elif "message" in event and "quick_reply" in event["message"]:
             return (event["sender"]["id"], event["message"]["quick_reply"]["payload"])
+
+def complaint(data):
+    messaging_events = data["entry"][0]["messaging"]
+    for event in messaging_events:
+       return (event["sender"]["id"], event["message"]["text"])

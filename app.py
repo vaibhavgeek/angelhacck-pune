@@ -37,9 +37,9 @@ def webhook():
         payload = request.get_data()
 
         sender, message = messaging_events(payload)
-        print "this is the pay load :" + message 
+        print "this is the pay load :" + data[]
         user = db.user.find_one({"fbId": sender})
-        
+        data = complaint(data)
         fbinfo = get_user_info(sender)
         if user is None:
             db.user.insert({"fbId": sender ,  "first_name" : fbinfo["first_name"] , "last_name" : fbinfo["last_name"] , "profile_pic" : fbinfo["profile_pic"]})
@@ -89,7 +89,7 @@ def webhook():
             send_text_message(sender , "Thanks for your telling your Gender. We have noted it down.")
             send_text_message(sender,"Can you please tell us about the complaint?")
 
-        elif message.startswith("Complaint:"):
+        elif data[1].startswith("Complaint:"):
             db.complaints.update({"fbId": user["fbId"]} , {"$set" : { "complaint_text" : message[3:] }})
             sender_text_message(sender, "We are here to help you, Can you please upload a image related to the voilence.Anything might be helpful ")
 
