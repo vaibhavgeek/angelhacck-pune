@@ -131,7 +131,7 @@ def webhook():
             
             data = a.json()
             
-            Labels = data["responses"][0]["webDetection"]
+            Labels = data["responses"][0]["webDetection"]["webEntities"]
             for Label in Labels:
                 print Label
             print "Labels caught"
