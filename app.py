@@ -111,11 +111,12 @@ def webhook():
             send_text_message(sender,"Can you please tell us about the complaint?")
 
 
-        elif message.startswith("imhelp"): 
+        elif message ==  "imhelp": 
             db.complaints.insert({"fbId" : sender})
             send_text_message(sender , "Please provide us your location so that we can asset you")
             
         elif message.startswith("coordinates"):
+            print "gets printed"
             send_text_message(sender,"NGO no 9998705087 , name 9998705087")
 
         elif message.startswith("Complaint"):
