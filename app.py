@@ -14,7 +14,7 @@ app = Flask(__name__)
 client = MongoClient(CONNECTION)
 db = client.angelhack10
     
-
+labelist = ["child abuse" , "bribe" , "domestic violence" , "acid attack" , "dowry" ]
 
 @app.route('/', methods=['GET'])
 def verify():
@@ -102,10 +102,15 @@ def webhook():
             send_text_message(sender , "Thanks for your telling your Gender. We have noted it down.")
             send_text_message(sender,"Can you please tell us about the complaint?")
 
-        elif message.startswith("Complaint :"):
-            dat = json.dumps({"encodingType": "UTF8","document": {"type": "PLAIN_TEXT","content": message}})
+        elif message.startswith("Complaint"):
+            dat = json.dumps({"encodingType": "UTF8","document": {"type": "PLAIN_TEXT","content": message[10:]}})
             a = requests.post("https://language.googleapis.com/v1/documents:analyzeEntities?key=AIzaSyCsnF5slLTIh4CxKnO82SNfc3A6YHNwOiw",dat)
-            print a.json()
+            data_label_text =  a.json()
+            for utility in data_try["entities"]:
+                if utility["type"] == "OTHER":
+                    useful = utility["name"] + " : " + utility["salience"]
+                    many += usful
+            db.complaints.update({"fbId": user["fbId"]} , {"$set" : { "complaint_text_labels" : many }})
             db.complaints.update({"fbId": user["fbId"]} , {"$set" : { "complaint_text" : message }})
             send_text_message(sender,"We are here to help you, Can you please upload a image related to the voilence.Anything might be helpful")
 
@@ -114,7 +119,8 @@ def webhook():
             dat = json.dumps({"requests":[{"image":{"source":{"imageUri":message}},"features":[{"type":"WEB_DETECTION","maxResults":100}]}]})
             a = requests.post("https://vision.googleapis.com/v1/images:annotate?key=AIzaSyCsnF5slLTIh4CxKnO82SNfc3A6YHNwOiw",dat)
             db.complaints.update({"fbId": user["fbId"]} , {"$set" : { "complaint_pic" : message }})
-            print a.json()
+            data = a.json()
+            
             send_text_message(sender,"Thanks for the image. We are making sure of the aunthenticity of image.")
 
         # elif message == "topics_to_learn" or message == "back":
