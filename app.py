@@ -58,9 +58,13 @@ def webhook():
                 print message
                 print sender
 
+        print "hi"
         user = db.user.find_one({"fbId": sender})
+        print "bye"
         fbinfo = get_user_info(sender)
+        print "ji"
         if user is None:
+            print "tata"
             db.user.insert({"fbId": sender ,  "first_name" : fbinfo["first_name"] , "last_name" : fbinfo["last_name"] , "profile_pic" : fbinfo["profile_pic"]})
             user = db.user.find_one({"fbId": sender })
 
