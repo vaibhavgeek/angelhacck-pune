@@ -52,16 +52,9 @@ def webhook():
                 message,sender = urlparser(payload)
                 print message
                 print sender
-            finally:
-                
-
-        print "hi"
         user = db.user.find_one({"fbId": sender})
-        print "bye"
         fbinfo = get_user_info(sender)
-        print "ji"
         if user is None:
-            print ""
             db.user.insert({"fbId": sender ,  "first_name" : fbinfo["first_name"] , "last_name" : fbinfo["last_name"] , "profile_pic" : fbinfo["profile_pic"]})
             user = db.user.find_one({"fbId": sender })
 
@@ -112,10 +105,7 @@ def webhook():
 
         elif message == "imhelp": 
             send_text_message(sender , "Please provide us your location so that we can asset you")
-        
-
-        elif message.startwith("Coordina"): 
-            send_text_message(sender , "thanks for the message")
+    
             
 
 
@@ -216,30 +206,8 @@ def webhook():
         #             generate_button("Ask Doubts", "ask_doubt" + message)
         #         ]
         #     )
-    except:
-        print("case for location")
-        message,sender=sendcoordinates(payload)
-        print message
-        print sender 
-
-        print "hi loc"
-        user = db.user.find_one({"fbId": sender})
-        print "bye loc"
-        fbinfo = get_user_info(sender)
-        print "ji loc"
-        if user is None:
-            print ""
-            db.user.insert({"fbId": sender ,  "first_name" : fbinfo["first_name"] , "last_name" : fbinfo["last_name"] , "profile_pic" : fbinfo["profile_pic"]})
-            user = db.user.find_one({"fbId": sender })
-
-       # db.user.update({"fbId": user["fbId"]} , {"$set" : {}})
-        
-         
-        print message
-        if message == "Coordinates":
-            send_text_message(sender , "Hi, thank you for providing location")
-            
-                
+    except: 
+        pass        
     return "ok"
 
 def log(message):  # simple wrapper for logging to stdout on heroku
