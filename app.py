@@ -48,17 +48,10 @@ def webhook():
                 print message
                 print sender
             except:
-                try:
-                    print("case for url:")
-                    message,sender = urlparser(payload)
-                    print message
-                    print sender
-                except:
-                    print("case for cordinates")
-                    message,sender = sendcoordinates(payload)
-                    print message
-                    print sender
-    
+                print("case for url:")
+                message,sender = urlparser(payload)
+                print message
+                print sender
 
         user = db.user.find_one({"fbId": sender})
         fbinfo = get_user_info(sender)
@@ -115,10 +108,6 @@ def webhook():
             db.complaints.insert({"fbId" : sender})
             send_text_message(sender , "Please provide us your location so that we can asset you")
             
-        elif message.startswith("coordinates"):
-            print "gets printed"
-            send_text_message(sender,"NGO no 9998705087 , name 9998705087")
-
         elif message.startswith("Complaint"):
             many = ""
             dat = json.dumps({"encodingType": "UTF8","document": {"type": "PLAIN_TEXT","content": message[10:]}})
