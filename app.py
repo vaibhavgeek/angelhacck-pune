@@ -106,7 +106,7 @@ def webhook():
             dat = json.dumps({"encodingType": "UTF8","document": {"type": "PLAIN_TEXT","content": message[10:]}})
             a = requests.post("https://language.googleapis.com/v1/documents:analyzeEntities?key=AIzaSyCsnF5slLTIh4CxKnO82SNfc3A6YHNwOiw",dat)
             data_label_text =  a.json()
-            for utility in data_try["entities"]:
+            for utility in data_label_text["entities"]:
                 if utility["type"] == "OTHER":
                     useful = utility["name"] + " : " + utility["salience"]
                     many += usful
