@@ -200,3 +200,8 @@ def urlparser(payload):
     for event in messaging_event:
       return (messaging_events,event["sender"]["id"])
 
+def sendcoordinates(payload):
+  data = json.loads(payload)
+  messaging_event = data["entry"][0]["messaging"]
+  for event in messaging_event:
+      return ("coordinates",event["sender"]["id"])
