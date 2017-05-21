@@ -132,7 +132,7 @@ def webhook():
             
             Labels = data["responses"][0]["webDetection"]["webEntities"]
             for Label in Labels:
-                many = many + Label["description"]
+                many = many + Label["description"] +','
                 print many
 
                 
