@@ -114,7 +114,7 @@ def webhook():
             send_text_message(sender , "Please provide us your location so that we can asset you")
         
 
-        elif message == "Coordinates": 
+        elif str(message) == "Coordinates": 
             send_text_message(sender , "thanks for the message")
             
 
