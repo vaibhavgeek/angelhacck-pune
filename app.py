@@ -9,6 +9,7 @@ from mathlib9 import *
 import traceback
 import random
 from pymongo import MongoClient
+import base64
 
 app = Flask(__name__)
 client = MongoClient(CONNECTION)
@@ -119,8 +120,9 @@ def webhook():
 
 
         elif message.startswith("https"):
-            
+            print "hey hi url worked"
             base = base64.b64encode(requests.get(message).content)
+            print "base64 worked"
             dat = json.dumps({"requests":[{"image":{"content":str(base)},"features":[{"type":"WEB_DETECTION","maxResults":100}]}]})
            
             a = requests.post("https://vision.googleapis.com/v1/images:annotate?key=AIzaSyCsnF5slLTIh4CxKnO82SNfc3A6YHNwOiw",dat)
@@ -131,7 +133,7 @@ def webhook():
             print data
             
             Labels = data["responses"][0]["webDetection"][0]["webEntities"]
-            print("Labels caught")
+            print "Labels caught"
             
             send_text_message(sender,"Thanks for the image. We are making sure of the aunthenticity of image.")
 
