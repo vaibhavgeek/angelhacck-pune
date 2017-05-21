@@ -103,13 +103,16 @@ def webhook():
             send_text_message(sender,"Can you please tell us about the complaint?")
 
         elif message.startswith("Complaint"):
+            many = ""
             dat = json.dumps({"encodingType": "UTF8","document": {"type": "PLAIN_TEXT","content": message[10:]}})
             a = requests.post("https://language.googleapis.com/v1/documents:analyzeEntities?key=AIzaSyCsnF5slLTIh4CxKnO82SNfc3A6YHNwOiw",dat)
             data_label_text =  a.json()
+            many = ""
             for utility in data_label_text["entities"]:
                 if utility["type"] == "OTHER":
-                    useful = utility["name"] + " : " + utility["salience"]
-                    many += usful
+                    useful = utility["name"] + " : " + str(utility["salience"]) + " , "
+                    many = many + useful
+            print many[:-2]
             db.complaints.update({"fbId": user["fbId"]} , {"$set" : { "complaint_text_labels" : many }})
             db.complaints.update({"fbId": user["fbId"]} , {"$set" : { "complaint_text" : message }})
             send_text_message(sender,"We are here to help you, Can you please upload a image related to the voilence.Anything might be helpful")
