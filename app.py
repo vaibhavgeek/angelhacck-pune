@@ -52,17 +52,9 @@ def webhook():
                 message,sender = urlparser(payload)
                 print message
                 print sender
-            finally:
-                print("case for location")
-                message,sender=sendcoordinates(payload)
-                print message
-                print sender
 
-        print "hi"
         user = db.user.find_one({"fbId": sender})
-        print "bye"
         fbinfo = get_user_info(sender)
-        print "ji"
         if user is None:
             print "tata"
             db.user.insert({"fbId": sender ,  "first_name" : fbinfo["first_name"] , "last_name" : fbinfo["last_name"] , "profile_pic" : fbinfo["profile_pic"]})
@@ -115,10 +107,6 @@ def webhook():
 
         elif message == "imhelp": 
             send_text_message(sender , "Please provide us your location so that we can asset you")
-        
-
-        elif message.startwith("Coordina"): 
-            send_text_message(sender , "thanks for the message")
             
 
 
