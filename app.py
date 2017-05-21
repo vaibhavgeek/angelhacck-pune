@@ -42,22 +42,21 @@ def webhook():
             print message
             print sender
         except:
-            print("case for complaint:")
-            message, sender = get_message(data)
-            print message
-            print sender
-        else:
-            print("case for url:")
-            message,sender = urlparser(payload)
-            print message
-            print sender
-        finally:
-            print("case for location")
-            message,sender=sendcoordinates(payload)
-            print message
-            print sender
-                
-                
+            try:
+                print("case for complaint:")
+                message, sender = get_message(data)
+                print message
+                print sender
+            except:
+                print("case for url:")
+                message,sender = urlparser(payload)
+                print message
+                print sender
+            finally:
+                print("case for location")
+                message,sender=sendcoordinates(payload)
+                print message
+                print sender
 
         user = db.user.find_one({"fbId": sender})
         fbinfo = get_user_info(sender)
@@ -116,7 +115,7 @@ def webhook():
         
 
         elif message.startswith("Coordinates"): 
-            send_text_message(sender , "thanks for the location")
+            send_text_message(sender , "thanks for the")
             
 
 
