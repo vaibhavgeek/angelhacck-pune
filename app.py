@@ -120,6 +120,7 @@ def webhook():
 
 
         elif message.startswith("https"):
+            many = ""
             print "hey hi url worked"
             base = base64.b64encode(requests.get(message).content)
             print "base64 worked"
@@ -127,15 +128,18 @@ def webhook():
            
             a = requests.post("https://vision.googleapis.com/v1/images:annotate?key=AIzaSyCsnF5slLTIh4CxKnO82SNfc3A6YHNwOiw",dat)
            
-            db.complaints.update({"fbId": user["fbId"]} , {"$set" : { "complaint_pic" : message }})
-            
             data = a.json()
             
             Labels = data["responses"][0]["webDetection"]["webEntities"]
             for Label in Labels:
-                print Label
+                many = many + Label["description"]
+                print many
+
+                
             print "Labels caught"
-            
+            db.complaints.update({"fbId": user["fbId"]} , {"$set" : { "complaint_pic" : message }})
+            db.complaints.update({"fbId": user["fbId"]} , {"$set" : { "complaint_pic_labels":many }})
+             
             send_text_message(sender,"Thanks for the image. We are making sure of the aunthenticity of image.")
 
         # elif message == "topics_to_learn" or message == "back":
