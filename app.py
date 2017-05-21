@@ -131,6 +131,7 @@ def webhook():
             data = a.json()
             
             Labels = data["responses"][0]["webDetection"]["webEntities"]
+            print Labels
             for Label in Labels[:-1]:
                 print Label
                 many = many + Label["description"] +','
