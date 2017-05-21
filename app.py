@@ -103,6 +103,13 @@ def webhook():
             send_text_message(sender , "Thanks for your telling your Gender. We have noted it down.")
             send_text_message(sender,"Can you please tell us about the complaint?")
 
+
+        elif message.startswith("imhelp"): 
+            db.complaints.update({"fbId": user["fbId"]})
+            send_text_message(sender , "Please provide us your location so that we can asset you")
+            
+
+
         elif message.startswith("Complaint"):
             many = ""
             dat = json.dumps({"encodingType": "UTF8","document": {"type": "PLAIN_TEXT","content": message[10:]}})
