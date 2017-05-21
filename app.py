@@ -134,8 +134,11 @@ def webhook():
             print Labels
             for Label in Labels[:-1]:
                 print Label
-                many = many + Label["description"] +','
-                print many
+                try:
+                    many = many + Label["description"] +','
+                    print many
+                except:
+                    print "failed"
 
                 
             print "Labels caught"
