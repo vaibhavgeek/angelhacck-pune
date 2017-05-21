@@ -105,7 +105,7 @@ def webhook():
 
 
         elif message.startswith("imhelp"): 
-            db.complaints.update({"fbId": user["fbId"]})
+            db.complaints.insert({"fbId" : sender})
             send_text_message(sender , "Please provide us your location so that we can asset you")
             
 
