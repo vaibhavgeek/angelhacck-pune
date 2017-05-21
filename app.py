@@ -130,9 +130,10 @@ def webhook():
             db.complaints.update({"fbId": user["fbId"]} , {"$set" : { "complaint_pic" : message }})
             
             data = a.json()
-            print data
             
-            Labels = data["responses"][0]["webDetection"][0]["webEntities"]
+            Labels = data["responses"][0]["webDetection"]
+            for Label in Labels:
+                print Label
             print "Labels caught"
             
             send_text_message(sender,"Thanks for the image. We are making sure of the aunthenticity of image.")
