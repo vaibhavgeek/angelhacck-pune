@@ -110,11 +110,10 @@ def webhook():
 
 
         elif message == "imhelp": 
-            db.complaints.insert({"fbId" : sender})
             send_text_message(sender , "Please provide us your location so that we can asset you")
         
 
-        elif str(message) == "Coordinates": 
+        elif message.startwith("Coordina"): 
             send_text_message(sender , "thanks for the message")
             
 
