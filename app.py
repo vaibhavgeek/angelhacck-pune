@@ -119,13 +119,20 @@ def webhook():
 
 
         elif message.startswith("https"):
-            dat = json.dumps({"requests":[{"image":{"source":{"imageUri":message}},"features":[{"type":"WEB_DETECTION","maxResults":100}]}]})
+            
+            base = base64.b64encode(requests.get(message).content)
+            dat = json.dumps({"requests":[{"image":{"content":str(base)},"features":[{"type":"WEB_DETECTION","maxResults":100}]}]})
+           
             a = requests.post("https://vision.googleapis.com/v1/images:annotate?key=AIzaSyCsnF5slLTIh4CxKnO82SNfc3A6YHNwOiw",dat)
+           
             db.complaints.update({"fbId": user["fbId"]} , {"$set" : { "complaint_pic" : message }})
+            
             data = a.json()
             print data
+            
             Labels = data["responses"][0]["webDetection"][0]["webEntities"]
             print("Labels caught")
+            
             send_text_message(sender,"Thanks for the image. We are making sure of the aunthenticity of image.")
 
         # elif message == "topics_to_learn" or message == "back":
