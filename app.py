@@ -52,6 +52,10 @@ def webhook():
                 message,sender = urlparser(payload)
                 print message
                 print sender
+            else:
+                message,sender=sendcoordinates(payload)
+                print message
+                print sender
 
         user = db.user.find_one({"fbId": sender})
         fbinfo = get_user_info(sender)
@@ -104,11 +108,15 @@ def webhook():
             send_text_message(sender,"Can you please tell us about the complaint?")
 
 
-        elif message.startswith("imhelp"): 
+        elif message == "imhelp": 
             db.complaints.insert({"fbId" : sender})
             send_text_message(sender , "Please provide us your location so that we can asset you")
+        
+
+        elif message.startswith("Coordinates"): 
+            send_text_message(sender , "thanks for the location")
             
-            
+
 
         elif message.startswith("Complaint"):
             many = ""
