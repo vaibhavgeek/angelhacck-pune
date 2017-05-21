@@ -53,6 +53,7 @@ def webhook():
                 print message
                 print sender
             else:
+                print("case for location")
                 message,sender=sendcoordinates(payload)
                 print message
                 print sender
